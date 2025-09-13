@@ -1,0 +1,303 @@
+"vim:loadview:
+"for netrw to change later
+let g:netrw_banner=0
+runtime! ftplugin/man.vim
+"use the defaults.vim file 
+""source $VIMRUNTIME/defaults.vim
+"removes the linenumbers from terminal buffers
+""autocmd TerminalOpen * set nonu 
+autocmd TerminalOpen * setlocal nonumber norelativenumber
+set mouse=a
+set history=1900
+"set both for the current line to show the number 
+set number
+set relativenumber
+set showcmd
+set backspace=indent,eol,start
+set wildmenu
+set wildmode=longest,full
+set incsearch
+syntax on
+filetype plugin on
+filetype indent on
+"restore cursor this is from default.vim
+augroup RestoreCursor
+  autocmd!
+  autocmd BufReadPost *
+    \ let line = line("'\"")
+    \ | if line >= 1 && line <= line("$") && &filetype !~# 'commit'
+    \      && index(['xxd', 'gitrebase'], &filetype) == -1
+    \ |   execute "normal! g`\""
+    \ | endif
+augroup END
+"set fileformat=unix
+set showmatch
+set matchtime=7
+set backup
+set backupdir=$XDG_CONFIG_HOME/vim/backups
+"set patchmode=.unmod
+set updatecount=100
+set autoindent
+set linebreak
+set showbreak=\
+set virtualedit=
+set ignorecase smartcase
+set magic
+set ruler "no need if using lightline
+set showcmd "no need if using lightline
+set foldcolumn=1
+set listchars=tab:>-,trail:-
+set tags=$XDG_CONFIG_HOME/vim/tags
+
+set omnifunc=syntaxcomplete#Complete
+"set the system clipboard
+"set clipboard=unnamed
+"set spell
+set wildignore+=*.swp,*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+set nocompatible
+set visualbell
+set title
+set confirm
+set noerrorbells
+"set tabstop=4
+"set softtabstop=4
+"set shiftwidth=4
+"set expandtab
+set smartindent
+set report=0 
+set encoding=utf-8
+set hlsearch
+set wrap
+set cursorline
+"set cursorcolumn
+set scrolloff=8
+"set path+=**
+set noshowmode
+"this disable creation of swapfile but also disable the recovery options..
+""set noswapfile
+set undodir=$XDG_CONFIG_HOME/vim/undodir
+set undofile
+set splitright
+"let g:ctrlp_use_caching = 0
+"let g:rainbow_active = 1
+
+"Function key mappings
+:map <F4> :w !date<CR>
+"map <F4> :Ranger<CR>
+nnoremap <F2>    :IndentLinesToggle<CR>
+"inoremap <F2> <C-x><C-k>
+"nnoremap <leader><F2> :Black<CR>
+"let g:UltiSnipsExpandTrigger='<F1>'
+"let g:UltiSnipsJumpForwardTrigger="<F1>"
+"let g:UltiSnipsJumpBackwardTrigger="<F1>"
+noremap <F5> :set list!<CR>
+inoremap <F5> <C-o>:set list!<CR>
+cnoremap <F5> <C-c>:set list!<CR>
+"nnoremap <F9> :colorscheme off<CR>
+nnoremap <F3> :noh<CR>
+"nnoremap <F8> :Goyo<CR>
+nnoremap <F6> :setlocal spell! spelllang=en_us<CR>
+set nomodeline 
+
+
+" plugin manager 
+"call plug#begin()
+"Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+"Plug 'ldelossa/vimdark'
+"Plug 'flazz/vim-colorschemes'
+"learn this vim visual multi plugin....
+"Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+"Plug 'fcpg/vim-orbital'
+"Plug 'itchyny/lightline.vim'
+""Plug 'SirVer/ultisnips'
+""Plug 'psf/black'
+""Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+""Plug 'honza/vim-snippets'
+"for git in vim (fugitive)
+""Plug 'tpope/vim-fugitive'
+"learn vim surround...
+""Plug 'tpope/vim-surround'
+""Plug 'francoiscabrol/ranger.vim'
+""Plug 'yuttie/comfortable-motion.vim'
+"Plug 'ycm-core/YouCompleteMe'
+""Plug 'davidhalter/jedi'
+""Plug 'junegunn/goyo.vim'
+""Plug 'nvie/vim-flake8'
+""Plug 'Yggdroot/indentLine'
+"Plug 'lunacookies/vim-substrata'
+"Plug 'lifepillar/vim-mucomplete', {'on' : []}
+"Plug 'xavierd/clang_complete'
+
+""Plug 'morhetz/gruvbox'
+"call plug#end()
+
+
+
+"mucomplete
+
+ let g:clang_library_path='/Users/titan/homebrew/Cellar/llvm/19.1.2/lib/libclang.dylib'
+set noinfercase
+set completeopt-=preview
+set completeopt+=menuone,noselect
+" The following line assumes `brew install llvm` in macOS
+let g:clang_user_options = '-std=c++14'
+let g:clang_complete_auto = 1
+let g:mucomplete#enable_auto_at_startup = 1 
+"goyo
+" Width
+"Goyo 220
+" Height
+"Goyo x60
+" In percentage
+"Goyo 120x50%
+" With offsets
+"Goyo 50%+25%x50%-25%
+"function! s:goyo_enter()
+"  if executable('tmux') && strlen($TMUX)
+"    silent !tmux set status off
+"    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+"  endif
+"
+"
+"endfunction
+"
+"function! s:goyo_leave()
+"  if executable('tmux') && strlen($TMUX)
+"    silent !tmux set status on
+"    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+"  endif
+"
+"
+"  " ...
+"endfunction
+"
+"autocmd! User GoyoEnter nested call <SID>goyo_enter()
+"autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+
+
+"colorscheme
+"let my_colorschemes = [ 'tender', 'substrata', 'gruvbox']
+"execute 'colorscheme' my_colorschemes[rand() % (len(my_colorschemes) - 1 ) ]
+colorscheme substrata
+
+
+
+"youcompleteme
+"let g:ycm_complete_in_strings = 0
+"let g:ycm_python_interpreter_path = '/opt/homebrew/bin/python3'
+"let g:ycm_python_sys_path = []
+"let g:ycm_extra_conf_vim_data = [
+   \  'g:ycm_python_interpreter_path',
+   \  'g:ycm_python_sys_path'
+   \]
+"let g:ycm_global_ycm_extra_conf = '~/.global_extra_conf.py'
+"let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/autoload/.ycm_extra_conf.py'
+"let g:ycm_use_clangd = 1
+"let g:ycm_min_num_of_chars_for_completion = 2
+"let g:ycm_python_binary_path = '/opt/homebrew/opt/python@3.11/bin/python3.11'
+"let g:ycm_seed_identifiers_with_syntax = 1
+"let g:enable_ycm_at_startup = 1 
+"let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_confirm_extra_conf = 0
+"let g:ycm_autoclose_preview_window_after_completion = 1
+"let g:ycm_add_preview_to_completeopt = "popup"
+"set complete+=kspell
+"set completeopt=menuone,noinsert
+"set pumheight=18
+"let g:ycm_max_num_candidates_to_detail = 5
+"let g:ycm_complete_in_comments = 0
+"let g:ycm_collect_identifiers_from_comments_and_strings = 1
+"let g:ycm_collect_identifiers_from_tags_files = 1
+"let g:ycm_server_python_interpreter = '/opt/homebrew/opt/python@3.9/bin/python3.9'
+"let g:ycm_keep_logfiles = 1
+"let g:ycm_key_list_stop_completion = ['<Enter>']
+"let g:ycm_semantic_triggers =  {
+  \   'json': [ 're!\w' ],
+  \ }
+"nmap <F6> <Plug>(YCMFindSymbolInWorkspace)
+"nmap <<F6>> <Plug>(YCMFindSymbolInDocument)
+"map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+
+
+"black
+"autocmd BufWritePre *.py execute ':Black'
+
+
+"indentation
+let g:indentLine_enabled = 0
+"statusline
+"set laststatus=2
+"let g:lightline = {
+"      \ 'colorscheme': 'one',
+"      \ 'active': {
+"      \   'left': [ [ 'mode', 'paste' ],
+"      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+"      \ },
+"      \ 'component_function': {
+"      \   'gitbranch': 'FugitiveHead'
+"      \ },
+"      \ }
+
+
+
+"mapping
+vnoremap jh  <Esc>
+let  mapleader = " "
+"inoremap <expr> <CR> pumvisible() ? "<C-y>" :"<CR>"
+
+"smooth scroll
+"let g:comfortable_motion_scroll_down_key = "j"
+"let g:comfortable_motion_scroll_up_key = "k"
+"noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(10)<CR>
+"noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-10)<CR>
+"let g:comfortable_motion_no_default_key_mappings = 1
+
+"let g:UltiSnipsEditSplit="vertical"
+"autocmd FileType python map <buffer> <F7> :call flake8#Flake8()<CR>
+"nnoremap ; :
+"vnoremap ; :
+
+"imap jh <Esc> 
+inoremap jh <Esc>
+
+inoremap (      ()<Left>
+inoremap (<CR>  (<CR>)<Esc>O
+inoremap ((     (
+inoremap ()     ()
+"tnoremap <Esc> <C-\><C-n>
+"nnoremap <C-J> <C-W><C-J>
+"nnoremap <C-K> <C-W><C-K>
+"nnoremap <C-L> <C-W><C-L>
+"nnoremap <C-H> <C-W><C-H>
+nnoremap <silent> <leader>- :vertical resize -10<CR>
+nnoremap <silent> <leader>+ :vertical resize +10<CR>
+nnoremap <silent> <leader>< :horizontal resize -10<CR>
+nnoremap <silent> <leader>> :horizontal resize +10<CR>
+"inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+"  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+"noremap <expr> <M-,> pumvisible() ? '<C-n>' :
+"  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+"vnoremap <leader><py> :!pyhton
+"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"smooth scrollin
+"let g:comfortable_motion_friction = 700.0
+"let g:comortable_motion_air_drag = 200.0
+"nnoremap  <silent>   <tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
+"nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
+
+
+
+"pymode
+"let g:pymode_paths = []
+"let g:pymode_doc_bind = '<F1>'
+"let g:pymode_motion = 0
+"let g:pymode_run = 0
+"let g:pymode_rope_autoimport = 1
+"setlocal complete+=t
+"setlocal formatoptions-=t
+"let g:pymode_rope_completion_bind = '<C-space>'
+"let python_highlight_all=1
+
+

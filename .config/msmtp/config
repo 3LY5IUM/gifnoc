@@ -1,0 +1,39 @@
+# Set default values for all following accounts.
+defaults
+auth on
+tls on
+tls_trust_file /Users/elysium/homebrew/Cellar/ca-certificates/2025-05-20/share/ca-certificates/cacert.pem
+logfile ~/.config/msmtp/msmtp.log
+
+account default : gmail
+# this fixes the empty reply from server issue
+tls_starttls off
+
+account gmail
+host smtp.gmail.com
+port 465
+from hardiksahu2020@gmail.com
+user hardiksahu2020@gmail.com
+# coz the isync.gpg has the gmail app password.
+# passwordeval "gpg -dq ~/.config/mutt/isync.gpg"
+
+# Use XOAUTH2 (Gmail’s OAuth2 SASL mechanism)
+auth     xoauth2
+
+# Use mutt_oauth2.py to fetch and refresh the access token as the SMTP password
+# The script prints JSON; we extract the "access_token" field.
+passwordeval   "python3 ~/.config/mutt/mutt_oauth2.py ~/.config/mutt/oauth2.token"
+
+
+account uni
+host smtp.gmail.com
+port 465
+from f20230754@goa.bits-pilani.ac.in
+user f20230754@goa.bits-pilani.ac.in
+# coz the isync.gpg has the gmail app password.
+# passwordeval "gpg -dq ~/.config/mutt/isync.gpg"
+# Use XOAUTH2 (Gmail’s OAuth2 SASL mechanism)
+auth     xoauth2
+# Use mutt_oauth2.py to fetch and refresh the access token as the SMTP password
+# The script prints JSON; we extract the "access_token" field.
+passwordeval   "python3 ~/.config/mutt/mutt_oauth2.py ~/.config/mutt/oauth2_uni.token"

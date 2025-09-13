@@ -1,0 +1,180 @@
+#chaning window focus
+# options can be: (north, east, south, west), recent, prev, next, first, last.
+# focus window in direction of focused window (options: north, east, south, west)
+cmd + ctrl + alt - j : yabai -m window --focus south
+# focus window that was previously focused
+cmd + ctrl + alt - k : yabai -m window --focus north
+# focus previous or next window in window tree (options: prev, next)
+cmd + ctrl + alt - h : yabai -m window --focus west
+# focus first or last window in window tree (options: first, last)
+cmd + ctrl + alt - l : yabai -m window --focus east
+# focus window under cursor
+#cmd + ctrl + alt - m : yabai -m window --focus mouse
+
+# space command req scripting addition which req to disable sip.
+#cmd + ctrl - b : yabai -m space --move prev
+#can not even move space but use the built in shortcut for that ig.
+
+
+# Balance out all windows both horizontally and vertically 
+#   to occupy the same space
+cmd + ctrl + alt - 0x2C : yabai -m space --balance
+
+# Flip the tree horizontally
+cmd + ctrl + alt - 0x27 : yabai -m space --mirror x-axis
+# Flip the tree vertically
+cmd + ctrl + alt - 0x29 : yabai -m space --mirror y-axis
+# Rotate the window tree clock-wise (options: 90, 180, 270 degree)
+cmd + ctrl + alt - 0x2B : yabai -m space --rotate 90
+cmd + ctrl + alt - 0x2F : yabai -m space --rotate 270
+
+# Set layout of the space (options: bsp, float)
+# TODO change to better more ergonomic key
+cmd + ctrl + alt - r : yabai -m space --layout bsp
+cmd + ctrl + alt + shift - r : yabai -m space --layout float
+
+# TODO better keys
+# toggle padding on the current space
+cmd + ctrl + alt - x : yabai -m space --toggle padding
+cmd + ctrl + alt - v : yabai -m space --padding rel:1:1:1:1
+cmd + ctrl + alt + shift - v : yabai -m space --padding rel:-1:-1:-1:-1
+cmd + ctrl + alt + shift - x : yabai -m space --padding abs:0:0:0:0
+# toggle gap between windows on the current space
+cmd + ctrl + alt - z : yabai -m space --toggle gap
+cmd + ctrl + alt + shift - z : yabai -m space --gap  abs:0:0:0:0
+cmd + ctrl + alt - c : yabai -m space --gap rel:1:1:1:1
+cmd + ctrl + alt + shift - c : yabai -m space --gap rel:-1:-1:-1:-1
+
+# swap window position and size with window in direction of focused window
+#   (options: north, east, south, west)
+cmd + ctrl + alt  - o : yabai -m window --swap north
+cmd + ctrl + alt  - p : yabai -m window --swap east
+cmd + ctrl + alt  - i : yabai -m window --swap south
+cmd + ctrl + alt  - u : yabai -m window --swap west
+
+
+# warp at window in direction of focused window
+#   (options: north, east, south, west)
+cmd + shift + ctrl + alt - h : yabai -m window --warp west
+cmd + shift + ctrl + alt - j : yabai -m window --warp south
+cmd + shift + ctrl + alt - k : yabai -m window --warp north
+cmd + shift + ctrl + alt - l : yabai -m window --warp east
+
+
+# increase window size
+ctrl + alt - h : yabai -m window --resize top_left:-20:0
+ctrl + alt - j : yabai -m window --resize bottom_right:0:20
+ctrl + alt - k : yabai -m window --resize top_right:0:-20
+ctrl + alt - l : yabai -m window --resize bottom_right:20:0
+
+# decrease window size
+ctrl + alt + shift - h : yabai -m window --resize left:20:0
+ctrl + alt + shift - j : yabai -m window --resize bottom:0:-20
+ctrl + alt + shift - k : yabai -m window --resize top:0:20
+ctrl + alt + shift - l : yabai -m window --resize right:-20:0
+
+#
+
+
+# move windows in float
+ctrl + alt + cmd + shift - 7 : yabai -m window --move rel:-20:0
+ctrl + alt + cmd + shift - 8 : yabai -m window --move rel:0:20
+ctrl + alt + cmd + shift - 9 : yabai -m window --move rel:0:-20
+ctrl + alt + cmd + shift - 0 : yabai -m window --move rel:20:0
+
+# move window to previous space
+#cmd + alt + ctrl - n : yabai -m window --space prev
+#cmd + alt + ctrl - m : yabai -m window --space next
+
+# move window to space 
+#cmd + alt + ctrl - 1 : yabai -m window --space 1 --focus
+#cmd + alt + ctrl - 2 : yabai -m window --space 2 --focus
+#cmd + alt + ctrl - 3 : yabai -m window --space 3 --focus
+#cmd + alt + ctrl - 4 : yabai -m window --space 4 --focus
+
+
+# move window to space and move to that space 
+#cmd + alt + ctrl + shift - 1 : yabai -m window --space 1
+#cmd + alt + ctrl - 2 : yabai -m window --space 2
+#cmd + alt + ctrl + shift - 3 : yabai -m window --space 3
+#cmd + alt + ctrl + shift - 4 : yabai -m window --space 4
+
+cmd + alt + ctrl + shift - a : yabai -m window --toggle zoom-parent
+cmd + alt + ctrl - a : yabai -m window --toggle zoom-fullscreen
+
+cmd + alt + ctrl - s : yabai -m window --toggle split
+
+
+
+# toggle whether the focused window should be tiled (only on bsp spaces)
+cmd + alt + ctrl - d : yabai -m window --toggle float
+# toggle mode
+cmd + alt + ctrl + shift - d : bash $XDG_CONFIG_HOME/yabai/toggle_mode.sh 
+
+
+
+#move window to prev and next space
+# TODO does not work with current macos version.
+#shift + alt - p : yabai -m window --space prev;
+#shift + alt - n : yabai -m window --space next;
+
+cmd + alt + ctrl - q : yabai --restart-service
+
+# better resize
+# Resize windows
+cmd + shift + lctrl + alt - u : yabai -m window --resize left:-50:0; \
+                  yabai -m window --resize right:-50:0
+cmd + shift + lctrl + alt - i : yabai -m window --resize bottom:0:50; \
+                  yabai -m window --resize top:0:50
+cmd + shift + lctrl + alt - o : yabai -m window --resize top:0:-50; \
+                  yabai -m window --resize bottom:0:-50
+cmd + shift + lctrl + alt - p : yabai -m window --resize right:50:0; \
+                  yabai -m window --resize left:50:0
+
+# Set insertion point for focused container
+cmd + lctrl + alt - 7 : yabai -m window --insert west
+cmd + lctrl + alt - 8 : yabai -m window --insert south
+cmd + lctrl + alt - 9 : yabai -m window --insert north
+cmd + lctrl + alt - 0 : yabai -m window --insert east
+
+
+
+cmd + ctrl + alt - y : yabai -m space --toggle show-desktop
+
+
+cmd + ctrl + alt - b : bash $XDG_CONFIG_HOME/borders/toggle_borders.sh
+
+cmd + alt - s : bash $XDG_CONFIG_HOME/skhd/menu_tog.sh
+
+ctrl + alt + cmd - f : yabai -m space --layout "$(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "stack" else "bsp" end')"
+
+
+cmd + alt + ctrl - t : osascript -e 'tell application "Terminal" to activate'
+cmd + alt + ctrl + shift - f : osascript -e 'tell application "Preview" to activate'
+cmd + alt + ctrl + shift - t : osascript -e 'tell application "IINA" to activate'
+
+cmd + alt + ctrl - g : open -a Firefox
+
+
+# toggle darkmode
+ctrl + cmd + alt + shift - b : osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'  
+
+# focus the top windows
+ctrl + cmd + alt - tab : osascript $XDG_CONFIG_HOME/skhd/focus.sh 
+
+
+
+ # cycle forwards on the focused display
+#cmd - 0x27 : id="$(yabai -m query --spaces --display | jq 'sort_by(.index) | reverse | .[map(."has-focus") | index(true) - 1].index')" && yabai -m space --focus "${id}"
+
+# cycle backwards on the focused display
+# id="$(yabai -m query --spaces --display | jq 'sort_by(.index) | .[map(."has-focus") | index(true) - 1].index')" && yabai -m space --focus "${id}"
+#
+
+# ocr shortcut
+cmd + alt + shift - 4 : ocr | pbcopy
+
+
+
+cmd + alt + ctrl - 0x32 : yabai -m window prev --focus
+cmd + alt + ctrl + shift - 0x32 : yabai -m window next --focus

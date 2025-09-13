@@ -1,0 +1,131 @@
+# vim: set filetype=neomuttrc:
+# Enhanced Substrata Color Scheme for NeoMutt with Futuristic Light Purple Accents
+# Based on Aramis Razzaghipour's Substrata theme with futuristic enhancements
+
+# Enhanced Substrata Color Palette (existing + new futuristic additions):
+# Light purple additions for futuristic feel:
+# light_purple: #b19cd9 -> color146 (futuristic accent)
+# bright_purple: #d4c5f0 -> color183 (bright highlights)
+# neon_purple: #a855f7 -> color135 (neon accents)
+# cyber_purple: #8b5cf6 -> color99 (cyberpunk elements)
+
+# basic colors with enhanced futuristic elements ---------------------------------------------------------
+color error               color216  color235                        # message line error text (light_red)
+color tilde               color146  color234                        # vi-like tildes with light purple (futuristic)
+color message             color183  color235                        # status messages with bright purple
+color markers       bold  color234  color135                        # wrapped-line markers with neon purple bg
+color attachment    bold  color146  color235                        # attachment headers in light purple
+color search              color234  color135                        # search patterns with neon purple bg
+color status        bold  color183  color53                         # status line with bright purple
+color indicator     bold  color234  color146                        # selected email with light purple bg (futuristic)
+color tree          bold  color146  color234                        # thread arrows in light purple
+
+# Enhanced index colors with futuristic purple accents ----------------------------------------------------------------
+color index               color173  color234        "~A"            # all messages (red)
+color index               color216  color234        "~E"            # expired messages (light_red)
+color index         bold  color183  color234        "~N"            # new messages in bright purple (futuristic)
+color index               color107  color234        "~O"            # old messages (green)
+color index               color243  color234        "~R"            # read messages (base6)
+color index         bold  color146  color234        "~Q"            # replied messages in light purple
+color index         bold  color183  color234        "~U"            # unread messages in bright purple
+color index         bold  color183  color234        "~U~$"          # unread, unreferenced messages
+color index               color250  color234        "~v"            # collapsed thread messages (base7)
+color index               color146  color234        "~P"            # messages from me in light purple
+color index         bold  color135  color234        "~F"            # flagged messages in neon purple
+color index         bold  color135  color234        "~F~p"          # flagged messages to me
+color index         bold  color99   color234        "~N~F"          # new flagged messages in cyber purple
+color index         bold  color99   color234        "~N~F~p"        # new flagged messages to me
+color index         bold  color99   color234        "~U~F~p"        # unread flagged messages to me
+color index               color234  color216        "!~N ~D"        # deleted messages
+color index               color234  color216        "~N ~D"         # deleted new messages
+color index               color146  color234        "~v~(!~N)"      # collapsed thread with no unread (light purple)
+color index               color183  color234        "~v~(~N)"       # collapsed thread with unread (bright purple)
+color index               color183  color234        "~N~v~(~N)"     # collapsed thread with unread parent
+color index               color135  color234        "~v~(~F)!~N"    # collapsed thread with flagged (neon purple)
+color index               color183  color234        "~v~(~F~N)"     # collapsed thread with unread & flagged
+color index               color183  color234        "~N~v~(~F~N)"   # collapsed thread complex state
+color index               color183  color234        "~N~v~(~F)"     # collapsed thread with unread parent & flagged
+color index               color146  color234        "~v~(~p)"       # collapsed thread to me directly
+color index               color116  color216        "~v~(~D)"       # thread with deleted
+color index               color135  color234        "~T"            # tagged messages in neon purple
+color index         bold  color135  color234        "~T~F"          # tagged, flagged messages
+color index         bold  color135  color234        "~T~N"          # tagged, new messages
+color index         bold  color135  color234        "~T~U"          # tagged, unread messages
+
+# Enhanced prompt with futuristic purple
+color prompt              color183 color234                         # bright purple prompt
+
+# Enhanced message headers with futuristic accents ------------------------------------------------------
+color hdrdefault    bold  color250  color235                        # default headers (base7)
+color header        bold  color146  color235        "^(From|To|Cc|Bcc)"     # addressing headers in light purple
+color header        bold  color183  color235        "^(Subject|Date)"       # subject and date in bright purple
+color header        bold  color135  color235        "^(Reply-To|Message-ID)" # special headers in neon purple
+color header        bold  color99   color235        "^(X-.*|User-Agent)"    # technical headers in cyber purple
+
+# Enhanced body colors with futuristic elements -----------------------------------------------------------------
+color quoted              color146  color235                        # first level quotes (light purple)
+color quoted1             color183  color235                        # second level quotes (bright purple)
+color quoted2             color116  color235                        # third level quotes (light_cyan)
+color quoted3             color135  color235                        # fourth level quotes (neon purple)
+color quoted4             color99   color235                        # fifth level quotes (cyber purple)
+color quoted5             color107  color235                        # sixth level quotes (green)
+color signature           color241  color235                        # signature (base5)
+
+color bold                color183  color234                        # bold text in bright purple
+color underline           color234  color146                        # underlined text with light purple bg
+color normal              color250  color234                        # normal text (base7)
+
+## Enhanced PGP colors with futuristic theme
+color body                color216  color234        "(BAD signature)"       # bad PGP signature
+color body                color183  color234        "(Good signature)"      # good PGP in bright purple
+color body                color146  color234        "^gpg: Good signature .*" # GPG good signature in light purple
+color body                color241  color234        "^gpg: "                # GPG prefix (base5)
+color body                color241  color216        "^gpg: BAD signature from.*" # GPG bad signature
+
+# Enhanced URL and email highlighting with futuristic purple accents
+color body          bold  color135  color234        "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
+
+# Enhanced email highlighting
+color body          bold  color135  color234        "((@(([0-9a-z-]+\\.)*[0-9a-z-]+\\.?|#[0-9]+|\\[[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\]),)*@(([0-9a-z-]+\\.)*[0-9a-z-]+\\.?|#[0-9]+|\\[[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\]):)?[0-9a-z_.+%$-]+@(([0-9a-z-]+\\.)*[0-9a-z-]+\\.?|#[0-9]+|\\[[0-2]?[0-9]?[0-9]\\.[0-2]?[0-9]?[0-9]\\.[0-2]?[0-9]?[0-9]\\.[0-2]?[0-9]?[0-9]\\])"
+
+# Enhanced futuristic highlighting patterns
+color body          bold  color183  color234        "\\*[^*]+\\*"        # *bold* text in bright purple
+color body          bold  color146  color234        "_[^_]+_"            # _underlined_ text in light purple
+color body          bold  color135  color234        "/[^/]+/"            # /italic/ text in neon purple
+color body                color241  color234        "^>[[:space:]]*$"    # empty quote lines
+color body          bold  color99   color234        "TODO|FIXME|NOTE|BUG|HACK" # keywords in cyber purple
+color body          bold  color183  color234        "URGENT|IMPORTANT|CRITICAL" # priority keywords
+color body          bold  color135  color234        "\\b[A-Z]{2,}\\b"    # ACRONYMS in neon purple
+
+# Enhanced sidebar colors (if sidebar is enabled) with futuristic theme
+color sidebar_indicator   color234  color146                        # sidebar indicator with light purple bg
+color sidebar_highlight   color183  color238                        # sidebar highlight in bright purple
+color sidebar_spoolfile   color135  color234                        # spoolfile in neon purple
+color sidebar_new         color183  color234                        # new mail in bright purple
+color sidebar_ordinary    color250  color234                        # ordinary folders
+color sidebar_flagged     color135  color234                        # flagged folders in neon purple
+color sidebar_divider     color146  color234                        # divider in light purple
+
+# Enhanced compose colors (if available) with futuristic accents
+color compose header            color146  color235               # compose headers in light purple
+color compose security_encrypt  color183  color235               # encryption status in bright purple
+color compose security_sign     color135  color235               # signing status in neon purple
+color compose security_both     color99   color235               # both security in cyber purple
+color compose security_none     color241  color235               # no security
+
+# Enhanced status bar colors with futuristic elements
+color status color183 color53 "NeoMutt: [^]]+]"                   # NeoMutt title in bright purple
+color status color146 color53 "\\([^)]+\\)"                      # parenthetical info in light purple
+color status color135 color53 "New:[0-9]+"                       # new message count in neon purple
+color status color99  color53 "Flag:[0-9]+"                      # flagged count in cyber purple
+
+# Additional futuristic enhancements for better visual hierarchy
+color index         bold  color135  color234        "~b \"AI|artificial intelligence|machine learning|neural|algorithm\"" # AI-related emails
+color index         bold  color99   color234        "~b \"crypto|blockchain|bitcoin|ethereum|NFT\""                      # crypto-related emails
+color index         bold  color183  color234        "~b \"urgent|asap|immediate|priority\""                             # urgent emails
+color body          bold  color146  color234        "\\b(https?://[^ \\t\\r\\n<>\"]*github[^ \\t\\r\\n<>\"]*)\\b"       # GitHub links
+color body          bold  color135  color234        "\\b[0-9a-fA-F]{40}\\b"                                             # Git commit hashes
+color body          bold  color99   color234        "\\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\\b" # UUIDs
+
+# vi: ft=muttrc ts=4 sw=4 sts=4 et
+

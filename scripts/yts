@@ -1,0 +1,253 @@
+// "YTS" -- search youtube inside the CLI -and- watch videos in mpv! 100% portable and minimal.
+// Compile this with "gcc yts.c -o yts -static -O2"
+// Make sure mpv is installed.
+// Screenshot: https://i.imgur.com/wfUnrWk.png
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <fcntl.h>
+#include <termios.h>
+
+#define MAX_RESULTS 5
+#define MAX_URL 256
+#define MAX_TITLE 100
+#define BUFFER_SIZE 16384
+#define MAX_VIDEOS 50
+
+struct Video {
+    char title[MAX_TITLE];
+    char url[MAX_URL];
+    char video_id[12];
+};
+
+void parse_html(char *html, struct Video *videos, int *video_count) {
+    char *pos = html;
+    char seen_ids[MAX_VIDEOS][12] = {0};
+    int count = 0;
+    
+    while(count < MAX_VIDEOS && pos && (pos = strstr(pos, "/watch?v=")) != NULL) {
+        char video_id[12] = {0};
+        strncpy(video_id, pos + 9, 11);
+        
+        int is_duplicate = 0;
+        for(int i = 0; i < count; i++) {
+            if(strcmp(seen_ids[i], video_id) == 0) {
+                is_duplicate = 1;
+                break;
+            }
+        }
+        if(is_duplicate) {
+            pos += 11;
+            continue;
+        }
+        
+        strcpy(seen_ids[count], video_id);
+        snprintf(videos[count].url, MAX_URL, "https://www.youtube.com/watch?v=%s", video_id);
+        strcpy(videos[count].video_id, video_id);
+        
+        char *title_start = pos - 2000;
+        if(title_start < html) title_start = html;
+        title_start = strstr(title_start, "<yt-formatted-string");
+        if(title_start && title_start < pos) {
+            title_start = strstr(title_start, ">");
+            if(title_start && title_start < pos) {
+                title_start++;
+                char *title_end = strstr(title_start, "</yt-formatted-string>");
+                if(title_end && title_end > title_start) {
+                    int title_len = title_end - title_start;
+                    if(title_len >= MAX_TITLE) title_len = MAX_TITLE - 1;
+                    if(title_len > 10) {
+                        strncpy(videos[count].title, title_start, title_len);
+                        videos[count].title[title_len] = '\0';
+                    }
+                }
+            }
+        }
+        
+        if(videos[count].title[0] == '\0') {
+            title_start = pos - 1000;
+            if(title_start < html) title_start = html;
+            while(title_start < pos) {
+                if(strncmp(title_start, "{\"text\":\"", 9) == 0) {
+                    title_start += 9;
+                    char *title_end = strchr(title_start, '"');
+                    if(title_end && (title_end - title_start) > 10) { 
+                        int title_len = title_end - title_start;
+                        if(title_len >= MAX_TITLE) title_len = MAX_TITLE - 1;
+                        strncpy(videos[count].title, title_start, title_len);
+                        videos[count].title[title_len] = '\0';
+                        break;
+                    }
+                }
+                title_start++;
+            }
+        }
+        
+        
+        if(videos[count].title[0] != '\0') {
+            if(strstr(videos[count].title, "Adicionar à fila") || 
+               strstr(videos[count].title, "Mantenha o cursor") ||
+               strstr(videos[count].title, "Tocando agora")) {
+                videos[count].title[0] = '\0';
+            } else {
+                count++;
+            }
+        } else {
+            videos[count].url[0] = '\0';
+        }
+        
+        pos += 11;
+    }
+    *video_count = count;
+}
+
+void search_youtube(char *query, struct Video *videos, int *video_count) {
+    int pipefd[2];
+    pid_t pid;
+    
+    if(pipe(pipefd) == -1) {
+        perror("pipe");
+        exit(1);
+    }
+    
+    pid = fork();
+    if(pid == -1) {
+        perror("fork");
+        exit(1);
+    }
+    
+    if(pid == 0) {
+        close(pipefd[0]);
+        dup2(pipefd[1], STDOUT_FILENO);
+        close(pipefd[1]);
+        
+        char url[512];
+        char formatted_query[256] = {0};
+        int i = 0;
+        for(char *q = query; *q && i < sizeof(formatted_query) - 1; q++) {
+            formatted_query[i++] = (*q == ' ') ? '+' : *q;
+        }
+        
+        snprintf(url, sizeof(url), 
+                "https://www.youtube.com/results?search_query=%s", 
+                formatted_query);
+        
+        execlp("wget", "wget", "-O", "-", "-q",
+               "--user-agent=Mozilla/5.0",
+               url, NULL);
+        
+        perror("execlp");
+        exit(1);
+    } else {
+        close(pipefd[1]);
+        
+        char buffer[BUFFER_SIZE];
+        ssize_t bytes_read;
+        char *html = malloc(1);
+        size_t total_size = 0;
+        html[0] = '\0';
+        
+        while((bytes_read = read(pipefd[0], buffer, BUFFER_SIZE-1)) > 0) {
+            buffer[bytes_read] = '\0';
+            char *temp = realloc(html, total_size + bytes_read + 1);
+            if(!temp) {
+                free(html);
+                perror("realloc");
+                exit(1);
+            }
+            html = temp;
+            memcpy(html + total_size, buffer, bytes_read);
+            total_size += bytes_read;
+            html[total_size] = '\0';
+        }
+        
+        if(total_size == 0) {
+            printf("No data received from YouTube. Check internet or wget.\n");
+            exit(1);
+        }
+        
+        close(pipefd[0]);
+        wait(NULL);
+        
+        parse_html(html, videos, video_count);
+        free(html);
+    }
+}
+
+void play_video(char *url) {
+    pid_t pid = fork();
+    if(pid == 0) {
+        execlp("mpv", "mpv", url, NULL);
+        perror("execlp mpv");
+        exit(1);
+    }
+    wait(NULL);
+}
+
+void display_results(struct Video *videos, int video_count, int offset) {
+    system("clear");
+    printf("\nSearch Results (Page %d):\n", (offset / MAX_RESULTS) + 1);
+    int end = offset + MAX_RESULTS < video_count ? offset + MAX_RESULTS : video_count;
+    for(int i = offset; i < end; i++) {
+        printf("%d. %s\n   %s\n\n", (i - offset) + 1, videos[i].title, videos[i].url);
+    }
+    printf("Use ← (left) for previous, → (right) for next, number to play, 0 to exit\n");
+}
+
+int main() {
+    char query[256];
+    struct Video videos[MAX_VIDEOS] = {0};
+    int video_count = 0;
+    int offset = 0;
+    
+    printf("Enter search query: ");
+    fgets(query, sizeof(query), stdin);
+    query[strcspn(query, "\n")] = 0;
+    
+    search_youtube(query, videos, &video_count);
+    
+    if(video_count == 0) {
+        printf("No results found. YouTube might have changed its HTML structure.\n");
+        return 1;
+    }
+    
+    struct termios oldt, newt;
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+    newt.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+    
+    int running = 1;
+    while(running) {
+        display_results(videos, video_count, offset);
+        
+        char c;
+        read(STDIN_FILENO, &c, 1);
+        
+        if(c >= '0' && c <= '9') {
+            int choice = c - '0';
+            if(choice == 0) {
+                running = 0;
+            } else if(choice <= MAX_RESULTS && (offset + choice - 1) < video_count) {
+                printf("Playing video in mpv...\n");
+                play_video(videos[offset + choice - 1].url);
+            }
+        } else if(c == 27) {
+            read(STDIN_FILENO, &c, 1);
+            if(c == '[') {
+                read(STDIN_FILENO, &c, 1);
+                if(c == 'C' && offset + MAX_RESULTS < video_count) {
+                    offset += MAX_RESULTS;
+                } else if(c == 'D' && offset >= MAX_RESULTS) {
+                    offset -= MAX_RESULTS;
+                }
+            }
+        }
+    }
+    
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    return 0;
+}

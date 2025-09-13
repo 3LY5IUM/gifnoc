@@ -1,0 +1,35 @@
+#!/bin/bash
+osascript -e 'on run' \
+-e 'if running of application "System Settings" then' \
+-e 'try' \
+-e 'tell application "System Settings" to quit' \
+-e 'end try' \
+-e 'delay 0.5' \
+-e 'end if' \
+-e 'repeat while running of application "System Settings" is true' \
+-e 'delay 0.5' \
+-e 'end repeat' \
+-e 'do shell script "open -j x-apple.systempreferences:com.apple.ControlCenter-Settings.extension"' \
+-e 'delay 1' \
+-e 'tell application "System Events"' \
+-e 'tell application process "System Settings"' \
+-e 'repeat until exists (pop up button 1 of group 9 of scroll area 1 of group 1 of group 2 of splitter group 1 of group 1 of window "Control Center")' \
+-e 'delay 0.2' \
+-e 'end repeat' \
+-e 'tell pop up button 1 of group 9 of scroll area 1 of group 1 of group 2 of splitter group 1 of group 1 of window "Control Center"' \
+-e 'click' \
+-e 'delay 0.2' \
+-e 'if value is "Always" then' \
+-e 'click menu item "In Full Screen Only" of menu 1' \
+-e 'else if value is "In Full Screen Only" then' \
+-e 'click menu item "Always" of menu 1' \
+-e 'else' \
+-e 'display alert "Unexpected value detected. Please check the UI structure."' \
+-e 'end if' \
+-e 'end tell' \
+-e 'end tell' \
+-e 'end tell' \
+-e 'delay 1' \
+-e 'tell application "System Settings" to quit' \
+-e 'end run'
+

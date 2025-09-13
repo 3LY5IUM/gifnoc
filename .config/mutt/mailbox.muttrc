@@ -1,0 +1,38 @@
+# not using this anymore coz i am using isync to keep stuff locally
+# vim: set filetype=neomuttrc
+
+# My mailboxes
+# set folder = "imaps://imap.gmail.com:993/[Gmail]"
+# set spoolfile = "+All Mail"
+# set postponed = "+Drafts"
+# set record = "+Sent Mail"
+# set trash = "+Trash"
+#
+# mailboxes =Important =Starred =Drafts ="Sent Mail" =Spam =Trash
+#
+# # Where to put the stuff
+# set header_cache = "$XDG_CACHE_HOME/mutt/headers"
+# set message_cachedir = "$XDG_CACHE_HOME/mutt/bodies"
+# set certificate_file = "$XDG_CACHE_HOME/mutt/certificates"
+# unset record
+
+
+
+
+# my mailboxes
+set mbox_type = Maildir
+set folder = "~/.local/email/hardiksahu2020/"
+set spoolfile = "+[Gmail].All Mail"
+set postponed = "+[Gmail].Drafts"
+set record = "+[Gmail].Sent Mail"
+set trash = "+[Gmail].Bin"
+mailboxes ="[Gmail].All Mail" ="[Gmail].Starred" ="[Gmail].Important" ="[Gmail].Drafts" ="[Gmail].Sent Mail" ="[Gmail].Bin" ="[Gmail].Spam" =INBOX
+
+# sets msmtp to send mail
+set sendmail = "msmtp -a hardiksahu2020@gmail.com"
+
+
+# multi account
+# Mailbox definitions (add to your ~/.config/mutt/mailbox.muttrc if not already there)
+# mailboxes `personal` +~/Mail/personal/INBOX +~/Mail/personal/[Gmail].All\ Mail +~/Mail/personal/[Gmail].Sent\ Mail +~/Mail/personal/[Gmail].Drafts
+# mailboxes `uni` +~/Mail/uni/INBOX +~/Mail/uni/Sent +~/Mail/uni/Drafts +~/Mail/uni/Archive

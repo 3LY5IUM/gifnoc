@@ -1,0 +1,14 @@
+#!/bin/bash
+
+options=(
+	style=round
+	width=4.0
+	hidpi=off
+	# cool red glow(0xFF000000)
+	# active_color="glow(0xFFFF1493)"
+	# cool purple
+	active_color="glow(0xFF7B68EE)"
+	#inactive_color="glow(0xFF000000)"
+)
+
+borders "${options[@]}"

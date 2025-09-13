@@ -1,0 +1,66 @@
+
+# Account: personal
+
+
+IMAPAccount personal
+Host imap.gmail.com
+PORT 993
+# this fucking line caused me a shit ton of headach.
+AuthMechs XOAUTH2
+User hardiksahu2020@gmail.com
+PassCmd "python3 $XDG_CONFIG_HOME/mutt/mutt_oauth2.py $XDG_CONFIG_HOME/mutt/oauth2.token" 
+TLSType IMAPS
+# CertificateFile /Users/elysium/homebrew/Cellar/ca-certificates/2025-07-15/share/ca-certificates/cacert.pem
+
+IMAPStore personal-remote
+Account personal
+
+MaildirStore personal-local
+Subfolders Verbatim
+Path ~/.local/email/hardiksahu2020/
+Inbox ~/.local/email/hardiksahu2020/INBOX
+Flatten .
+
+Channel personal
+FAR :personal-remote:
+NEAR :personal-local:
+Patterns *
+# Automatically create missing mailboxes, both locally and on the server
+Create Both
+# Sync the movement of messages between folders and deletions, add after making sure the sync works
+Expunge Both
+# Save the synchronization state files in the relevant directory
+SyncState *
+MaxMessages 0
+
+
+
+# Account: uni
+
+
+IMAPAccount uni
+Host imap.gmail.com
+Port 993
+AuthMechs XOAUTH2
+User f20230754@goa.bits-pilani.ac.in
+PassCmd "python3 $XDG_CONFIG_HOME/mutt/mutt_oauth2_uni.py $XDG_CONFIG_HOME/mutt/oauth2_uni.token"
+TLSType IMAPS
+# CertificateFile /Users/elysium/homebrew/Cellar/ca-certificates/2025-07-15/share/ca-certificates/cacert.pem
+
+IMAPStore uni-remote
+Account uni
+
+MaildirStore uni-local
+Subfolders Verbatim
+Path ~/.local/email/uni/
+Inbox ~/.local/email/uni/INBOX
+Flatten .
+
+Channel uni
+FAR :uni-remote:
+NEAR :uni-local:
+Patterns *
+Create Both
+Expunge Both
+SyncState *
+

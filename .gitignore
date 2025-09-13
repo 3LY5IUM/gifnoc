@@ -1,0 +1,29 @@
+.DS_Store
+**/.git/
+
+# ignore all the dirs.
+*/
+
+# except
+!scripts/
+# also have to include the dir before specifing the file in it.
+!.config/
+!.config/ascii_art/
+!.config/borders/
+!.config/btop/
+!.config/gallery-dl/
+!.config/glow/
+!.config/isyncrc
+!.config/karabiner/
+!.config/msmtp/
+!.config/mutt/
+!.config/neofetch/
+!.config/newsboat/
+!.config/nvim/
+!.config/skhd/
+!.config/tmux/
+!.config/vim/
+!.config/xournalpp/
+!.config/yabai/
+!.config/zathura/
+

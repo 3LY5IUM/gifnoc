@@ -1,0 +1,32 @@
+# vim: set filetype=neomuttrc:
+# keybinding
+
+macro index A \
+    "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
+    "mark all new as read"
+
+bind index j next-entry
+bind index k previous-entry
+bind pager j next-line
+bind pager k previous-line
+
+bind attach,index,pager \CD next-page
+bind attach,index,pager \CU previous-page
+bind pager g top
+bind pager G bottom
+bind attach,index g first-entry
+bind attach,index G last-entry
+
+
+# account switching
+macro index,pager ,p "<change-folder>~/.local/email/hardiksahu2020/INBOX<enter>" "Goto Personal"
+macro index,pager ,u "<change-folder>~/.local/email/uni/INBOX<enter>"         "Goto Uni"
+# macro index,pager ,p "<enter-command>unmailboxes *<enter><enter-command>source ~/.config/mutt/profile.personal<enter><change-folder>~/.local/email/hardiksahu2020/INBOX<enter><check-stats>" "Goto Personal"
+# macro index,pager ,u "<enter-command>unmailboxes *<enter><enter-command>source ~/.config/mutt/profile.uni<enter><change-folder>~/.local/email/uni/INBOX<enter><check-stats>" "Goto Uni"
+
+
+# integrating notmuch database
+# Updated macro to sync both accounts (assumes mbsync channels named 'personal' and 'uni')
+macro index ,s "<shell-escape>mbsync -V personal uni<enter><shell-escape>notmuch new<enter>" "sync email"
+macro index \Cf "<enter-command>unset wait_key<enter><shell-escape>read -p 'Enter a search term to find with notmuch: ' x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;s/\^id:// for@a;$,=\"|\";print@a' | perl -le '@a=<>; chomp@a; s/\\+/\\\\+/ for@a;print@a' \`\"<enter>" "show only messages matching a notmuch pattern"
+

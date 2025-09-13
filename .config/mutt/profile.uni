@@ -1,0 +1,38 @@
+# vim: set filetype=neomuttrc:
+# Clear all previous mailboxes first
+unmailboxes *
+
+# User
+set from = "f20230754@goa.bits-pilani.ac.in"
+set realname = "Hardik Sahu"
+
+
+# blue color status bar for personal profile.
+color status        color234  color76                     # status line (bg on light_blue
+
+# mailbox cofig for personal account.
+set mbox_type = Maildir
+set folder = "~/.local/email/uni/"
+set spoolfile = "+[Gmail].All Mail"
+set postponed = "+[Gmail].Drafts"
+set record = "+[Gmail].Sent Mail"
+set trash = "+[Gmail].Trash"
+mailboxes ="[Gmail].All Mail" ="[Gmail].Starred" ="[Gmail].Important" ="[Gmail].Drafts" ="[Gmail].Sent Mail" ="[Gmail].Trash" ="[Gmail].Spam" =INBOX
+
+
+# sets msmtp to send mail
+set sendmail = "msmtp -a f20230754@goa.bits-pilani.ac.in"
+
+
+# sidebar
+set sidebar_visible = yes  # comment to disable sidebar by default
+set sidebar_short_path = yes
+set sidebar_folder_indent = true
+set sidebar_format = "%B %* [%?N?%N / ?%S]"
+set mail_check_stats = true
+bind index,pager \CK sidebar-prev
+bind index,pager \CJ sidebar-next
+bind index,pager \CE sidebar-open
+bind index,pager B sidebar-toggle-visible
+
+
