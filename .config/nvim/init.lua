@@ -95,6 +95,4 @@ vim.cmd.colorscheme('substrata_insp')
 vim.opt.winborder = 'rounded'
 -- vim.opt.completeopt = "menu,fuzzy,menuone,noinsert,popup"
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
-vim.lsp.enable({ "lua_ls", "clangd", "awk_ls", "clangd", "dockerls", "jdtls", "jqls", "pyright", })
-
-
+vim.lsp.enable({ "lua_ls", "clangd", "awk_ls", "clangd", "dockerls", "jdtls", "jqls", "pyright", "bashls" })

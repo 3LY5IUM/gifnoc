@@ -1,7 +1,0 @@
-{
-  "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
-  "mason.nvim": { "branch": "main", "commit": "7dc4facca9702f95353d5a1f87daf23d78e31c2a" },
-  "nvim-jdtls": { "branch": "master", "commit": "8dbecd3fc86b4fc4120087767deab4604880d751" },
-  "nvim-lspconfig": { "branch": "master", "commit": "8b597f8fd1cf33e925f783a812ddcb81c5611a34" },
-  "vim-substrata": { "branch": "master", "commit": "f7b71f31d2ffa91715964b14b41ad4009d4d97f6" }
-}

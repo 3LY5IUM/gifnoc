@@ -1,0 +1,102 @@
+# ============================================================================
+# COOL ZATHURA CONFIG - Dark Theme with Purple Statusbar
+# ============================================================================
+
+# =========================
+# CORE APPEARANCE SETTINGS
+# =========================
+
+# Main window colors
+set default-bg "#1a1a1a"           # Dark background
+set default-fg "#e0e0e0"           # Light text
+
+# Document rendering
+set recolor-lightcolor "#1a1a1a"   # Dark background for recolored docs
+set recolor-darkcolor "#e0e0e0"    # Light text for recolored docs
+set recolor false                   # Start with normal PDF colors (toggle with Ctrl+r)
+set recolor-keephue true           # Preserve colors when recoloring
+
+# =========================
+# STATUSBAR - DARK PURPLE THEME
+# =========================
+
+set statusbar-bg "#4a148c"         # Dark purple background
+set statusbar-fg "#ffffff"         # White text for contrast
+set statusbar-h-padding 10         # Horizontal padding
+set statusbar-v-padding 3          # Vertical padding
+set statusbar-basename true        # Show only filename, not full path
+set statusbar-home-tilde true      # Use ~ for home directory
+
+# =========================
+# INPUT BAR (COMMAND LINE)
+# =========================
+
+set inputbar-bg "#3d1a78"          # Slightly different purple for depth
+set inputbar-fg "#ffffff"          # White text
+set completion-bg "#2d1a4d"        # Darker purple for completion menu
+set completion-fg "#e0e0e0"        # Light text for completion
+set completion-highlight-bg "#6a1b99"  # Highlighted completion item
+set completion-highlight-fg "#ffffff"  # White text for highlighted item
+
+# =========================
+# NOTIFICATIONS
+# =========================
+
+set notification-bg "#4a148c"      # Purple notifications
+set notification-fg "#ffffff"      # White text
+set notification-error-bg "#d32f2f"    # Red for errors
+set notification-error-fg "#ffffff"    # White text
+set notification-warning-bg "#ff8f00"  # Orange for warnings  
+set notification-warning-fg "#000000"  # Black text for contrast
+
+# =========================
+# INDEX/TOC COLORS
+# =========================
+
+set index-bg "#1a1a1a"            # Dark background
+set index-fg "#e0e0e0"            # Light text
+set index-active-bg "#4a148c"     # Purple for active item
+set index-active-fg "#ffffff"     # White text for active item
+
+# =========================
+# HIGHLIGHT COLORS
+# =========================
+
+set highlight-color "#7b1fa2"     # Purple for search highlights
+set highlight-active-color "#9c27b0"  # Brighter purple for active highlight
+
+# =========================
+# BEHAVIOR SETTINGS
+# =========================
+
+# Window and display
+set adjust-open "best-fit"         # Fit document to window
+set pages-per-row 1               # Single page view
+set scroll-page-aware true        # Page-aware scrolling
+set scroll-full-overlap 0.01     # Minimal overlap when scrolling
+set scroll-step 40               # Scroll step size
+
+# Interface
+set guioptions ""                 # Hide scrollbars and toolbars
+set window-title-basename true    # Show only filename in window title
+set selection-clipboard "clipboard"  # Copy to system clipboard
+
+# Font (optimized for macOS Terminal)
+set font "SF Mono Regular 12"     # macOS system monospace font
+
+# =========================
+# USEFUL KEYBINDINGS
+# =========================
+
+
+# Toggle full screen
+map f toggle_fullscreen
+
+# Auto-reload when file changes
+set recolor-reverse-video false
+
+# Performance
+set render-loading true
+set render-loading-bg "#1a1a1a"
+set render-loading-fg "#4a148c"
+
