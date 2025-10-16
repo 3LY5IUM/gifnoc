@@ -1,0 +1,11 @@
+return{
+    'mbbill/undotree',
+    config = function()
+      -- Configuration for undo tree
+      vim.api.nvim_set_keymap('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true, silent = true })
+      vim.g.undotree_WindowLayout = 2 -- Vertical split
+      vim.g.undotree_SplitWidth = 30 -- Width of the split window
+      vim.g.undotree_SetFocusWhenToggle = 1 -- Focus on the undo tree when toggled
+    end
+  }
+

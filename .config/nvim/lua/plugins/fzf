@@ -1,0 +1,42 @@
+return {
+	{
+		"ibhagwan/fzf-lua",
+		-- optional for icon support
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		-- or if using mini.icons/mini.nvim
+		-- dependencies = { "echasnovski/mini.icons" },
+		opts = {},
+		keys = {
+			{ "<leader>ff",
+			function()
+				require('fzf-lua').files({ resume = false }, {complete = true}) end,
+				desc="use fzf-lua to find files with resume."
+			},
+			{
+				"<leader>fg",
+				function()
+					require('fzf-lua').live_grep() end,
+					desc="use fzf-lua to do fuzzy grep on curent project."
+
+
+				},
+				{
+					"<leader>fa",
+						vim.cmd.FzfLua,
+						desc="exec vim.cmd.FzfLua normally."
+
+
+					},
+					{
+						"<leader>fr",
+						 function()
+							 require('fzf-lua').resume() end,
+						desc="open fzf in resumed state."
+
+
+					}
+
+				}
+
+			}
+		}
