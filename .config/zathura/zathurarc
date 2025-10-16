@@ -1,57 +1,57 @@
-
-# window frame configurations
-set window-height 3000
-set window-width 1000
-set statusbar-h-padding 0
-set statusbar-v-padding 0
-set page-padding 10
-set window-title-page true
-set guioptions vc
-
-# set scrolling options
-set scroll-step 40
-
-# font size
-set font "Fira Code 15"
-
 # clipboard configurations
 set selection-clipboard clipboard
 
-# mappings
-
-unmap f
-map f toggle_fullscreen
-map [fullscreen] f toggle_fullscreen
-
 # ----- colour config ----- 
-set notification-error-bg "#3E3859"
-set notification-error-fg "#f02e6e"
-set notification-warning-bg "#3E3859"
-set notification-warning-fg "#f02e6e"
-set notification-bg "#3E3859"
-set notification-fg "#f02e6e"
-set completion-group-bg "#3E3859"
-set completion-group-fg "#f2b482"
-set completion-bg "#1e1c31"
-set completion-fg "#cbe3e7"
-set completion-highlight-bg "#f2b482"
-set completion-highlight-fg "#3E3859"
-set inputbar-bg "#1e1c31"
-set inputbar-fg "#cbe3e7"
-set statusbar-bg "#3E3859"
-set statusbar-fg "#cbe3e7"
-set highlight-color "#f2b482"
-set highlight-active-color "#ffe6b3"
-set default-bg "#3E3859"
-set default-fg "#cbe3e7"
-set recolor-lightcolor "#1e1c31"
-set recolor-darkcolor "#cbe3e7"
-set index-bg "#1e1c31"
-set index-fg "#cbe3e7"
-set index-active-bg "#f2b482"
-set index-active-fg "#3E3859"
-set recolor true
+set notification-error-bg "#3e4452"
+set notification-error-fg "#c678dd"
+set notification-warning-bg "#3e4452"
+set notification-warning-fg "#c678dd"
+set notification-bg "#3e4452"
+set notification-fg "#c678dd"
+set completion-group-bg "#3e4452"
+set completion-group-fg "#e5c07b"
+set completion-bg "#282c34"
+set completion-fg "#abb2bf"
+set completion-highlight-bg "#e5c07b"
+set completion-highlight-fg "#3e4452"
+set inputbar-bg "#282c34"
+set inputbar-fg "#abb2bf"
+set statusbar-bg "#3e4452"
+set statusbar-fg "#abb2bf"
+set highlight-color "#e5c07b"
+set highlight-active-color "#e06c75"
+set default-bg "#3e4452"
+set default-fg "#abb2bf"
+set recolor-lightcolor "#282c34"
+set recolor-darkcolor "#abb2bf"
+set index-bg "#282c34"
+set index-fg "#abb2bf"
+set index-active-bg "#e5c07b"
+set index-active-fg "#3e4452"
 
 
-
+# custom
 set database sqlite
+# window title
+set window-title-page false
+set window-title-basename true
+# statusbar
+set statusbar-home-tilde true
+set statusbar-page-percent true
+# stuff
+set show-signature-information true
+# show unlimited recent stuff
+set show-recent 100
+set show-hidden true
+set show-directories true
+# set recolor-reverse-video true
+
+
+
+unmap v
+map v toggle_fullscreen
+map [fullscreen] v toggle_fullscreen
+
+
+
+
